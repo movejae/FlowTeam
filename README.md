@@ -119,14 +119,11 @@ src/
 
 ## 향후 개선 방향
 - [ ] 파일 업로드 기능과의 실제 연동
-- [ ] Spring Security를 통한 인증/권한 관리
 - [ ] 확장자별 차단 로그 이력 기록 및 조회
 - [ ] 대량 확장자 일괄 등록 (CSV/Excel 업로드)
 - [ ] 확장자 그룹 관리 기능 (예: 실행파일, 압축파일 등)
-- [ ] PostgreSQL/MySQL 등 프로덕션 DB 연동
 - [ ] 단위 테스트 및 통합 테스트 추가
 - [ ] API 문서화 (Swagger/OpenAPI)
-- [ ] 페이지네이션 및 검색 기능
 
 ## 라이선스
 This project is for assignment purposes only.
