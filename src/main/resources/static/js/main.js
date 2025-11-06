@@ -43,13 +43,19 @@ function loadFixedExtensions() {
             data.forEach(ext => {
                 const div = document.createElement('div');
                 div.className = 'checkbox-item';
-                div.innerHTML = `
-                    <input type="checkbox"
-                           id="ext-${ext.name}"
-                           ${ext.blocked ? 'checked' : ''}
-                           onchange="toggleFixedExtension('${ext.name}', this.checked)">
-                    <label for="ext-${ext.name}">${ext.name}</label>
-                `;
+
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.id = `ext-${ext.name}`;
+                checkbox.checked = ext.blocked;
+                checkbox.onchange = () => toggleFixedExtension(ext.name, checkbox.checked);
+
+                const label = document.createElement('label');
+                label.htmlFor = `ext-${ext.name}`;
+                label.textContent = ext.name;  // textContent로 XSS 방지
+
+                div.appendChild(checkbox);
+                div.appendChild(label);
                 container.appendChild(div);
             });
         })
@@ -85,10 +91,20 @@ function loadCustomExtensions() {
 function createExtensionTag(name) {
     const tag = document.createElement('div');
     tag.className = 'extension-tag';
-    tag.innerHTML = `
-        <span class="name">${name}</span>
-        <button class="btn-remove" onclick="removeExtension('${name}')" title="삭제">✕</button>
-    `;
+
+    const span = document.createElement('span');
+    span.className = 'name';
+    span.textContent = name;
+
+    const button = document.createElement('button');
+    button.className = 'btn-remove';
+    button.title = '삭제';
+    button.textContent = '✕';
+    button.onclick = () => removeExtension(name);
+
+    tag.appendChild(span);
+    tag.appendChild(button);
+
     return tag;
 }
 
