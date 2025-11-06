@@ -6,55 +6,74 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Malgun Gothic', sans-serif;
-    background-color: #f5f5f5;
-    padding: 40px 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 60px 20px;
 }
 
 .container {
-    max-width: 1000px;
+    max-width: 1100px;
     margin: 0 auto;
     background: white;
-    padding: 40px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
 }
 
 h1 {
-    font-size: 28px;
-    margin-bottom: 10px;
-    color: #333;
+    font-size: 36px;
+    margin-bottom: 12px;
+    color: #1a1a1a;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .subtitle {
-    color: #666;
-    margin-bottom: 30px;
-    font-size: 14px;
+    color: #6b7280;
+    margin-bottom: 40px;
+    font-size: 15px;
+    line-height: 1.6;
 }
 
 .section {
-    margin-bottom: 30px;
+    margin-bottom: 40px;
+    background: #f9fafb;
+    padding: 30px;
+    border-radius: 16px;
+    border: 1px solid #e5e7eb;
+    transition: all 0.3s ease;
+}
+
+.section:hover {
+    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.1);
+    border-color: #667eea;
 }
 
 .section-title {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 15px;
-    color: #333;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #1a1a1a;
     display: flex;
     align-items: center;
 }
 
 .section-number {
-    background-color: #dc3545;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    border-radius: 12px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: 14px;
-    margin-right: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    margin-right: 12px;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
 /* 고정 확장자 체크박스 */
@@ -70,16 +89,19 @@ h1 {
 }
 
 .checkbox-item input[type="checkbox"] {
-    width: 18px;
-    height: 18px;
-    margin-right: 8px;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
     cursor: pointer;
+    accent-color: #667eea;
 }
 
 .checkbox-item label {
     cursor: pointer;
     user-select: none;
-    font-size: 14px;
+    font-size: 15px;
+    color: #374151;
+    font-weight: 500;
 }
 
 /* 커스텀 확장자 입력 */
@@ -91,101 +113,154 @@ h1 {
 
 .input-group input[type="text"] {
     flex: 1;
-    padding: 10px 15px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 14px;
+    padding: 14px 18px;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    background: white;
 }
 
 .input-group input[type="text"]:focus {
     outline: none;
-    border-color: #6c757d;
+    border-color: #667eea;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
 }
 
 .btn-add {
-    padding: 10px 20px;
-    background-color: #6c757d;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 12px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 15px;
+    font-weight: 600;
     white-space: nowrap;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
 .btn-add:hover {
-    background-color: #5a6268;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
 }
 
 /* 커스텀 확장자 표시 영역 */
 .extensions-box {
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 15px;
-    min-height: 200px;
-    background-color: #fafafa;
+    border: 2px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 20px;
+    min-height: 240px;
+    max-height: 400px;
+    background: white;
     position: relative;
+    margin-top: 20px;
+    overflow: hidden;
 }
 
 .extensions-count {
     position: absolute;
-    top: 10px;
-    left: 10px;
-    font-size: 13px;
-    color: #666;
+    top: 16px;
+    left: 16px;
+    font-size: 14px;
+    color: #6b7280;
+    font-weight: 600;
+    background: #f3f4f6;
+    padding: 6px 12px;
+    border-radius: 8px;
+    z-index: 10;
 }
 
 .extensions-list {
-    margin-top: 30px;
+    margin-top: 50px;
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 8px;
+}
+
+/* 스크롤바 스타일링 */
+.extensions-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.extensions-list::-webkit-scrollbar-track {
+    background: #f3f4f6;
+    border-radius: 10px;
+}
+
+.extensions-list::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 10px;
+}
+
+.extensions-list::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #5568d3 0%, #65408b 100%);
 }
 
 .extension-tag {
     display: inline-flex;
     align-items: center;
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 6px 10px;
-    font-size: 13px;
+    background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+    border: 2px solid #667eea40;
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #667eea;
+    transition: all 0.3s ease;
+}
+
+.extension-tag:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+    border-color: #667eea;
 }
 
 .extension-tag .name {
-    margin-right: 8px;
+    margin-right: 10px;
 }
 
 .extension-tag .btn-remove {
     background: none;
     border: none;
     cursor: pointer;
-    font-size: 16px;
-    color: #999;
+    font-size: 18px;
+    color: #9ca3af;
     padding: 0;
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all 0.2s ease;
 }
 
 .extension-tag .btn-remove:hover {
-    color: #dc3545;
+    color: #ef4444;
+    transform: scale(1.2);
 }
 
 .empty-message {
-    color: #999;
+    color: #9ca3af;
     text-align: center;
     margin-top: 80px;
-    font-size: 14px;
+    font-size: 15px;
+    font-weight: 500;
 }
 
 .error-message {
-    color: #dc3545;
-    font-size: 13px;
-    margin-top: 5px;
+    color: #ef4444;
+    font-size: 14px;
+    margin-top: 8px;
     display: none;
+    padding: 8px 12px;
+    background: #fef2f2;
+    border-radius: 8px;
+    border-left: 3px solid #ef4444;
 }
 
 .error-message.show {
@@ -195,20 +270,22 @@ h1 {
 /* 토스트 메시지 */
 .toast {
     position: fixed;
-    top: 30px;
+    top: 40px;
     left: 50%;
-    transform: translateX(-50%) translateY(-20px);
-    background-color: #333;
-    color: white;
-    padding: 16px 24px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    font-size: 14px;
+    transform: translateX(-50%) translateY(-30px);
+    background: white;
+    color: #1a1a1a;
+    padding: 18px 28px;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+    font-size: 15px;
+    font-weight: 600;
     z-index: 1000;
     opacity: 0;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: opacity 0.4s ease, transform 0.4s ease;
     pointer-events: none;
-    max-width: 350px;
+    max-width: 400px;
+    border: 2px solid #e5e7eb;
 }
 
 .toast.show {
@@ -218,13 +295,19 @@ h1 {
 }
 
 .toast.success {
-    background-color: #28a745;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    border-color: #10b981;
 }
 
 .toast.error {
-    background-color: #dc3545;
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: white;
+    border-color: #ef4444;
 }
 
 .toast.info {
-    background-color: #17a2b8;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    color: white;
+    border-color: #3b82f6;
 }
