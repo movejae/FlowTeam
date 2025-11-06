@@ -15,23 +15,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// 토스트 메시지 표시 함수
-function showToast(message, type = 'success', duration = 2000) {
-    const toast = document.getElementById('toast');
-    toast.textContent = message;
-    toast.className = 'toast ' + type;
-
-    // 애니메이션을 위한 약간의 딜레이
-    setTimeout(() => {
-        toast.classList.add('show');
-    }, 10);
-
-    // 지정된 시간 후 숨김
-    setTimeout(() => {
-        toast.classList.remove('show');
-    }, duration);
-}
-
 // 고정 확장자 로드
 function loadFixedExtensions() {
     fetch('/api/extensions/fixed')
