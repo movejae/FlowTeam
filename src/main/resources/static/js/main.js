@@ -1,6 +1,3 @@
-// 전역 변수 (Thymeleaf에서 설정)
-let MAX_LENGTH = 20;
-let MAX_COUNT = 200;
 
 // 페이지 로드시 데이터 불러오기
 document.addEventListener('DOMContentLoaded', function() {
@@ -114,15 +111,15 @@ function addExtension() {
         return;
     }
 
-    if (extension.length > MAX_LENGTH) {
-        showError(`확장자는 최대 ${MAX_LENGTH}자까지 입력 가능합니다.`);
+    if (extension.length > EXTENSION_NAME_MAX_LENGTH) {
+        showError(`확장자는 최대 ${EXTENSION_NAME_MAX_LENGTH}자까지 입력 가능합니다.`);
         return;
     }
 
     // 현재 개수 확인
     const currentCount = parseInt(document.getElementById('currentCount').textContent);
-    if (currentCount >= MAX_COUNT) {
-        showError(`최대 ${MAX_COUNT}개까지만 추가할 수 있습니다.`);
+    if (currentCount >= EXTENSION_MAX_COUNT) {
+        showError(`최대 ${EXTENSION_MAX_COUNT}개까지만 추가할 수 있습니다.`);
         return;
     }
 
