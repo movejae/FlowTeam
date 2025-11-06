@@ -1,3 +1,23 @@
+// 메시지 상수
+const MESSAGES = {
+    SUCCESS: {
+        BLOCKED: (name) => `${name} 확장자 차단`,
+        UNBLOCKED: (name) => `${name} 확장자 차단 해제`
+    },
+    ERROR: {
+        EMPTY_INPUT: '확장자를 입력해주세요',
+        MAX_LENGTH: (max) => `확장자는 최대 ${max}자까지 입력 가능합니다`,
+        MAX_COUNT: (max) => `최대 ${max}개까지만 추가할 수 있습니다`,
+        INVALID_FORMAT: '확장자는 영문자와 숫자만 입력 가능합니다',
+        DUPLICATE: (name) => `${name} 확장자는 이미 차단되어 있습니다`,
+        UPDATE_FAILED: '업데이트 실패',
+        ADD_FAILED: '추가 실패',
+        DELETE_FAILED: '삭제 실패'
+    },
+    CONFIRM: {
+        DELETE: (name) => `'${name}' 확장자 차단을 해제하시겠습니까?`
+    }
+};
 
 // 페이지 로드시 데이터 불러오기
 document.addEventListener('DOMContentLoaded', function() {
@@ -83,14 +103,14 @@ function toggleFixedExtension(name, blocked) {
     })
     .then(response => {
         if (!response.ok) {
-            throw new Error('업데이트 실패');
+            throw new Error(MESSAGES.ERROR.UPDATE_FAILED);
         }
-        const statusText = blocked ? '차단됨' : '차단해제됨';
-        showToast(`${name} 확장자가 ${statusText}`, 'success');
+        const message = blocked ? MESSAGES.SUCCESS.BLOCKED(name) : MESSAGES.SUCCESS.UNBLOCKED(name);
+        showToast(message, 'success');
     })
     .catch(error => {
         console.error('고정 확장자 업데이트 실패:', error);
-        showToast('업데이트에 실패했습니다.', 'error');
+        showToast(MESSAGES.ERROR.UPDATE_FAILED, 'error');
         loadFixedExtensions(); // 원래 상태로 복구
     });
 }
@@ -107,19 +127,26 @@ function addExtension() {
 
     // 유효성 검사
     if (!extension) {
-        showError('확장자를 입력해주세요.');
+        showError(MESSAGES.ERROR.EMPTY_INPUT);
         return;
     }
 
     if (extension.length > EXTENSION_NAME_MAX_LENGTH) {
-        showError(`확장자는 최대 ${EXTENSION_NAME_MAX_LENGTH}자까지 입력 가능합니다.`);
+        showError(MESSAGES.ERROR.MAX_LENGTH(EXTENSION_NAME_MAX_LENGTH));
+        return;
+    }
+
+    // 영문자와 숫자만 허용 (정규식 검증)
+    const validPattern = /^[a-z0-9]+$/;
+    if (!validPattern.test(extension)) {
+        showError(MESSAGES.ERROR.INVALID_FORMAT);
         return;
     }
 
     // 현재 개수 확인
     const currentCount = parseInt(document.getElementById('currentCount').textContent);
     if (currentCount >= EXTENSION_MAX_COUNT) {
-        showError(`최대 ${EXTENSION_MAX_COUNT}개까지만 추가할 수 있습니다.`);
+        showError(MESSAGES.ERROR.MAX_COUNT(EXTENSION_MAX_COUNT));
         return;
     }
 
@@ -134,14 +161,18 @@ function addExtension() {
     .then(response => {
         if (!response.ok) {
             return response.json().then(err => {
-                throw new Error(err.message || '추가 실패');
+                // 중복 에러 메시지 처리
+                if (err.message && err.message.includes('이미 존재')) {
+                    throw new Error(MESSAGES.ERROR.DUPLICATE(extension));
+                }
+                throw new Error(err.message || MESSAGES.ERROR.ADD_FAILED);
             });
         }
         return response.json();
     })
     .then(() => {
         input.value = '';
-        showToast(`${extension} 확장자가 추가되었습니다`, 'success');
+        showToast(MESSAGES.SUCCESS.BLOCKED(extension), 'success');
         loadCustomExtensions();
     })
     .catch(error => {
@@ -152,7 +183,7 @@ function addExtension() {
 
 // 커스텀 확장자 삭제
 function removeExtension(extension) {
-    if (!confirm(`'${extension}' 확장자를 삭제하시겠습니까?`)) {
+    if (!confirm(MESSAGES.CONFIRM.DELETE(extension))) {
         return;
     }
 
@@ -161,14 +192,14 @@ function removeExtension(extension) {
     })
     .then(response => {
         if (!response.ok) {
-            throw new Error('삭제 실패');
+            throw new Error(MESSAGES.ERROR.DELETE_FAILED);
         }
-        showToast(`${extension} 확장자가 삭제되었습니다`, 'info');
+        showToast(MESSAGES.SUCCESS.UNBLOCKED(extension), 'info');
         loadCustomExtensions();
     })
     .catch(error => {
         console.error('확장자 삭제 실패:', error);
-        showToast('삭제에 실패했습니다.', 'error');
+        showToast(MESSAGES.ERROR.DELETE_FAILED, 'error');
     });
 }
 
