@@ -122,7 +122,8 @@ function toggleFixedExtension(name, blocked) {
             throw new Error(MESSAGES.ERROR.UPDATE_FAILED);
         }
         const message = blocked ? MESSAGES.SUCCESS.BLOCKED(name) : MESSAGES.SUCCESS.UNBLOCKED(name);
-        showToast(message, 'success');
+        const type = blocked ? 'success' : 'success-unblock';
+        showToast(message, type);
     })
     .catch(error => {
         console.error('고정 확장자 업데이트 실패:', error);
@@ -210,7 +211,7 @@ function removeExtension(extension) {
         if (!response.ok) {
             throw new Error(MESSAGES.ERROR.DELETE_FAILED);
         }
-        showToast(MESSAGES.SUCCESS.UNBLOCKED(extension), 'info');
+        showToast(MESSAGES.SUCCESS.UNBLOCKED(extension), 'success-unblock');
         loadCustomExtensions();
     })
     .catch(error => {

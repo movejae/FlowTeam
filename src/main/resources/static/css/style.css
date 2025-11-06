@@ -319,6 +319,12 @@ h1 {
     border-color: #10b981;
 }
 
+.toast.success-unblock {
+    background: #f97316;
+    color: white;
+    border-color: #f97316;
+}
+
 .toast.error {
     background: #ef4444;
     color: white;
