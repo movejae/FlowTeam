@@ -178,8 +178,7 @@ function addExtension() {
     .then(response => {
         if (!response.ok) {
             return response.json().then(err => {
-                // 중복 에러 메시지 처리
-                if (err.message && err.message.includes('이미 존재')) {
+                if (err.code === 'DUPLICATE_EXTENSION') {
                     throw new Error(MESSAGES.ERROR.DUPLICATE(extension));
                 }
                 throw new Error(err.message || MESSAGES.ERROR.ADD_FAILED);
