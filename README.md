@@ -47,15 +47,16 @@ gradlew.bat clean build
 - 변경 사항 자동 저장 및 새로고침 시 유지
 
 ### 2. 커스텀 확장자 관리
-- 사용자 정의 확장자 추가 (기본 최대 20자)
-- 기본 최대 200개까지 등록 가능
+- 사용자 정의 확장자 추가 (기본 최대 20자/ ExtensionConstants.EXTENSION_MAX_LENGTH)
+- 기본 최대 200개까지 등록 가능 (ExtensionConstants.MAX_CUSTOM_EXTENSIONS)
 - 개별 삭제 기능
 - 추가된 확장자는 태그 형태로 표시
 
 ### 3. 커스텀 확장자 상수(갯수, 최대길이) 관리
 - `ExtensionConstants` 클래스로 모든 상수를 중앙 관리
-- 확장자 최대 길이 (20자), 커스텀 확장자 최대 개수 (200개) 등
+- 확장자 최대 길이(EXTENSION_MAX_LENGTH), 커스텀 확장자 최대 개수 (MAX_CUSTOM_EXTENSIONS) 등
 - 변경 시 영향도를 주석으로 명시하여 안전한 유지보수 지원
+- 해당 상수는 프론트엔드 UI에서도 이용중임.
 
 ### 4. 예외 처리
 - 글로벌 예외 핸들러로 일관된 에러 응답
